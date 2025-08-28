@@ -1,0 +1,42 @@
+rules:
+  - id: "R001"
+    name: "patient_id_required"
+    description: "patient_id should not be empty"
+    type: "required"
+    dataset: "admissions"
+    field: "patient_id"
+    severity: "ERROR"
+    tags: ["stream","batch"]
+    owner: "etl-team"
+    version: 1
+    params:
+      sample_limit: 50
+    tests:
+      - name: "empty patient_id fails"
+        input:
+          - patient_id: ""
+        expect_fail: true
+
+  - id: "R002"
+    name: "age_range"
+    description: "The age should be within a reasonable range"
+    type: "range"
+    dataset: "patients"
+    field: "age"
+    severity: "WARN"
+    params:
+      min: 0
+      max: 120
+
+  - id: "R010"
+    name: "cross_patient_admission"
+    type: "cross"
+    left_dataset: "admissions"
+    right_dataset: "patients"
+    on:
+      left_col: "patient_id"
+      right_col: "id"
+    severity: "ERROR"
+    tags: ["batch"]
+    params:
+      sample_limit: 100
