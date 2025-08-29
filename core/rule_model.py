@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field as d_field
 from typing import Optional, Dict, Any, List
 
 @dataclass
@@ -13,9 +13,9 @@ class Rule:
     right_dataset: Optional[str] = None
     on: Optional[Dict[str,str]] = None
     expression: Optional[str] = None
-    params: Dict[str, Any] = field(default_factory=dict)
+    params: Dict[str, Any] = d_field(default_factory=dict)
     severity: str = "ERROR"
-    tags: List[str] = field(default_factory=list)
+    tags: List[str] = d_field(default_factory=list)
     owner: Optional[str] = None
     version: Optional[int] = 1
-    tests: List[Dict[str,Any]] = field(default_factory=list)
+    tests: List[Dict[str,Any]] = d_field(default_factory=list)
