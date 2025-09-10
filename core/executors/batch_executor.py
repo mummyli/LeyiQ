@@ -18,7 +18,7 @@ class BatchExecutor:
             # apply per-row (simplified)
             failures = []
             for _, row in df.iterrows():
-                fr = strat.check_row(row.to_dict())
+                fr = strat.check(row.to_dict())
                 if fr:
                     failures.append({"rule_id": rule.id, "failure": fr, "row": row.to_dict()})
             # write samples
