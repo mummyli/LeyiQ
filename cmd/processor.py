@@ -8,7 +8,7 @@ import pandas as pd
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--rules", default="rules/sample_rules.yaml")
-    parser.add_argument("--csv", required=True, help="path to csv for dataset")
+    parser.add_argument("--file", required=True, help="path to jsonl for dataset")
     parser.add_argument("--dataset", required=True)
     args = parser.parse_args()
 
@@ -22,7 +22,7 @@ def main():
     
     writer = ResultWriter()
     be = BatchExecutor(registry, writer)
-    df = pd.read_csv(args.csv)
+    df = pd.read_json(args.file, lines=True)
     res = be.run_batch(args.dataset, df)
     print("Results:", res)
 
