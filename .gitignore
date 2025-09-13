@@ -1,0 +1,5 @@
+*/__pycache__/
+tests/*
+tmp/*
+core/executors/__pycache__/
+core/strategies/__pycache__/
