@@ -1,10 +1,14 @@
 from typing import Dict, Callable
 from core.strategies.required import RequiredStrategy
 from core.strategies.range_check import RangeStrategy
+from core.strategies.data_type_check import DataTypeStrategy
+from core.strategies.conditional_mandatory import ConditionalMandatoryStrategy
 
 _STRATEGIES: Dict[str, Callable] = {
     "required": RequiredStrategy,
     "range": RangeStrategy,
+    "datatype": DataTypeStrategy,
+    "conditional_mandatory": ConditionalMandatoryStrategy
 }
 
 def get_strategy(name: str):
