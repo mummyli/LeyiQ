@@ -1,5 +1,5 @@
 rules:
-  - id: "R001"
+  - id: "R00001"
     name: "patient_id_required"
     description: "patient_id should not be empty"
     type: "required"
@@ -17,26 +17,73 @@ rules:
           - patient_id: ""
         expect_fail: true
 
-  - id: "R002"
+  - id: "R00002"
     name: "age_range"
     description: "The age should be within a reasonable range"
     type: "range"
-    dataset: "patients"
+    dataset: "admissions"
     field: "age"
     severity: "WARN"
     params:
       min: 0
       max: 120
 
-  - id: "R010"
-    name: "cross_patient_admission"
-    type: "cross"
-    left_dataset: "admissions"
-    right_dataset: "patients"
-    on:
-      left_col: "patient_id"
-      right_col: "id"
+  - id: "R00003"
+    name: "age_type_check"
+    description: "The field should be an integer"
+    type: "datatype"
+    dataset: "admissions"
+    field: "age"
     severity: "ERROR"
-    tags: ["batch"]
     params:
-      sample_limit: 100
+      expected_type: "int"
+
+  - id: "R00005"
+    name: "admission_date_check"
+    description: "Admission date must be valid date in format YYYY-MM-DD"
+    type: "datatype"
+    dataset: "admissions"
+    field: "admission_date"
+    severity: "ERROR"
+    params:
+      expected_type: "date"
+      format: "%Y-%m-%d"
+
+  - id: "R00006"
+    name: "admission_time_check"
+    description: "admission time must be valid time in format HH:MM:SS"
+    type: "datatype"
+    dataset: "admissions"
+    field: "admission_time"
+    severity: "ERROR"
+    params:
+      expected_type: "time"
+
+  - id: "R00007"
+    name: "ts_datetime_check"
+    description: "Event datetime must be valid in format YYYY-MM-DD HH:MM:SS"
+    type: "datatype"
+    dataset: "admissions"
+    field: "ts"
+    severity: "ERROR"
+    params:
+      expected_type: "datetime"
+      format: "%Y-%m-%dT%H:%M:%S.%f"
+
+  - id: "R00008"
+    name: "guardian_required_if_minor_in_cn"
+    description: "If age < 18 AND admission_type != 'EMERGENCY', guardian_name must not be null"
+    type: "conditional_mandatory"
+    dataset: "admissions"
+    field: "guardian_name"
+    severity: "ERROR"
+    params:
+      conditions:
+        - field: "age"
+          operator: "<"
+          value: 18
+        - field: "admission_type"
+          operator: "!="
+          value: "EMERGENCY"
+      logic: "AND"
+
