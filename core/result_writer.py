@@ -2,7 +2,7 @@ import os, json, time
 from typing import Dict, Any
 
 class ResultWriter:
-    def __init__(self, out_dir: str = "/tmp/leyiq_results"):
+    def __init__(self, out_dir: str = "./tmp/leyiq_results"):
         self.out_dir = out_dir
         os.makedirs(self.out_dir, exist_ok=True)
 
