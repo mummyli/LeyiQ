@@ -87,3 +87,38 @@ rules:
           value: "EMERGENCY"
       logic: "AND"
 
+  - id: "R00009"
+    name: "admission_date_range"
+    type: "datetime_range"
+    dataset: "admissions"
+    field: "admission_date"
+    severity: "ERROR"
+    params:
+      datatype: "date"
+      format: "%Y-%m-%d"
+      min: "1900-01-01"
+      max: "2025-12-31"
+
+  - id: "R00010"
+    name: "admission_time_range"
+    type: "datetime_range"
+    dataset: "admissions"
+    field: "admission_time"
+    severity: "ERROR"
+    params:
+      datatype: "time"
+      format: "%H:%M:%S"
+      min: "07:00:00"
+      max: "18:00:00"
+
+  - id: "R00011"
+    name: "ts_time_range"
+    type: "datetime_range"
+    dataset: "admissions"
+    field: "ts"
+    severity: "ERROR"
+    params:
+      datatype: "datetime"
+      format: "%Y-%m-%dT%H:%M:%S.%f"
+      min: "2020-01-01T00:00:00.000000"
+      max: "2030-12-31T23:59:59.999999"
