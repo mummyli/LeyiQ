@@ -4,13 +4,17 @@ from core.strategies.range_check import RangeStrategy
 from core.strategies.data_type_check import DataTypeStrategy
 from core.strategies.conditional_mandatory import ConditionalMandatoryStrategy
 from core.strategies.date_range import DateTimeRangeStrategy
+from core.strategies.str_length import StrLengthStrategy
+from core.strategies.whitespaces import WhitespaceStrategy
 
 _STRATEGIES: Dict[str, Callable] = {
     "required": RequiredStrategy,
     "range": RangeStrategy,
     "datatype": DataTypeStrategy,
     "conditional_mandatory": ConditionalMandatoryStrategy,
-    "datetime_range": DateTimeRangeStrategy
+    "datetime_range": DateTimeRangeStrategy,
+    "str_length": StrLengthStrategy,
+    "whitespace": WhitespaceStrategy
 }
 
 def get_strategy(name: str):
