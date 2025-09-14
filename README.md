@@ -30,3 +30,13 @@ It provides **unified rule definition, batch/stream execution, metrics & auditin
 * **Production Ready**
   * Docker & Docker Compose (Postgres + API + UI + Prometheus).
   * Kubernetes manifests & Helm chart skeletons.
+
+---
+
+## Get started
+Currently, only command line is supported, processing batch files in JSON format.
+
+you can run follow command:
+```bash
+./.venv/Scripts/python.exe /LeyiQ/cmd/processor.py --rules ./rules/sample_rules.yaml --file .\tests\datas\patient_admission_event.jsonl --dataset admission
+```
