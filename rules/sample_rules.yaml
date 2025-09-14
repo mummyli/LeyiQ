@@ -122,3 +122,21 @@ rules:
       format: "%Y-%m-%dT%H:%M:%S.%f"
       min: "2020-01-01T00:00:00.000000"
       max: "2030-12-31T23:59:59.999999"
+
+  - id: "R00012"
+    name: "admission_type_length"
+    type: "str_length"
+    dataset: "admissions"
+    field: "admission_type"
+    severity: "ERROR"
+    params:
+      min: 8
+      max: 10
+
+  - id: "R00013"
+    name: "visit_id_trim_check"
+    description: "The visit_id should not contain leading or trailing spaces"
+    type: "whitespace"
+    dataset: "admissions"
+    field: "visit_id"
+    severity: "WARN"
