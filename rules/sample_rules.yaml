@@ -152,7 +152,7 @@ rules:
       case_sensitive: true
       allow_null: false
 
-  - id: "R00014"
+  - id: "R00015"
     name: "tags_enum_check"
     type: "enum"
     dataset: "admissions"
@@ -165,3 +165,12 @@ rules:
       delimiter: ","
       trim: true
       allow_null: true
+
+  - id: "R00016"
+    name: "visit_id_pattern_check"
+    type: "regexp"
+    dataset: "admissions"
+    field: "visit_id"
+    severity: "WARN"
+    params:
+      pattern: "[a-z_A-Z]+-[0-9]+"

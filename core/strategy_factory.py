@@ -7,6 +7,8 @@ from core.strategies.date_range import DateTimeRangeStrategy
 from core.strategies.str_length import StrLengthStrategy
 from core.strategies.whitespaces import WhitespaceStrategy
 from core.strategies.enum_value import EnumValueStrategy
+from core.strategies.regexp import RegexStrategy
+
 
 _STRATEGIES: Dict[str, Callable] = {
     "required": RequiredStrategy,
@@ -16,7 +18,8 @@ _STRATEGIES: Dict[str, Callable] = {
     "datetime_range": DateTimeRangeStrategy,
     "str_length": StrLengthStrategy,
     "whitespace": WhitespaceStrategy,
-    "enum": EnumValueStrategy
+    "enum": EnumValueStrategy,
+    "regexp": RegexStrategy
 }
 
 def get_strategy(name: str):
